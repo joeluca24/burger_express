@@ -15,7 +15,7 @@ var orm = {
         queryString += cols.toString();
         queryString += ") ";
         queryString += "VALUES (";
-        queryString += printQuestionMarks(vals.length);
+        queryString += '?'.repeat(vals.length).split('').join(', '); "?, ?"
         queryString += ") ";
     
         console.log(queryString);
@@ -23,24 +23,19 @@ var orm = {
         return connectionQuery(queryString, ["burgers", ...vals]);
     },
     updateOne: function(objColVals, condition){
-        var queryString = "UPDATE " + "burgers";
-
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+        var queryString = "UPDATE " + " burgers SET ? WHERE ?";
     
+        // UPDATE burgers SET ? WHERE ?
         console.log(queryString);
-        return connectionQuery(queryString);
+        return connectionQuery(queryString, [objColVals,condition]);
     },
     // DELETE FROM burgers WHERE id = 1
     deleteOne: function(condition){
         var queryString = " DELETE " + "burgers";
-        queryString += " WHERE ";
-        queryString += condition;
+        queryString += " WHERE ? ";
     
         console.log(queryString);
-        return connectionQuery(queryString);
+        return connectionQuery(queryString,[condition]);
     }
 
 };
