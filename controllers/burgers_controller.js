@@ -17,6 +17,7 @@ router.get("/", function (req, res) {
         })
         .catch(err => {
             console.log(err);
+            res.status(500).json({error: "No data found on server. Error with reaad."});
         });
 });
 router.post("/api/burgers", function (req, res) {
@@ -24,9 +25,14 @@ router.post("/api/burgers", function (req, res) {
         "name", "devoured"
     ], [
         req.body.name, req.body.devoured
-    ], function (result) {
+    ])
+    .then(function (result) {
         res.json({ id: result.insertId });
-    });
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json({error: "Cannot insert data correctly. Bad request"})
+    })
 });
 
 router.put("/api/burgers/:id", function (req, res) {
@@ -36,7 +42,8 @@ router.put("/api/burgers/:id", function (req, res) {
 
     burger.update({
         devoured: req.body.devoured
-    }, condition, function (result) {
+    }, condition )
+    .then(function(result) {
         if (result.changedRows == 0) {
             return res.status(404).end();
         } else {
@@ -47,7 +54,8 @@ router.put("/api/burgers/:id", function (req, res) {
 router.delete("/api/burgers/:id", function (req, res) {
     var condition = "id = " + req.params.id;
 
-    burger.delete(condition, function (result) {
+    burger.delete(condition)
+    .then(function(result) {
         if (result.affectedRows == 0) {
 
             return res.status(404).end();

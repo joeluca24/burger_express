@@ -32,8 +32,16 @@ var orm = {
     
         console.log(queryString);
         return connectionQuery(queryString);
+    },
+    // DELETE FROM burgers WHERE id = 1
+    deleteOne: function(condition){
+        var queryString = " DELETE " + "burgers";
+        queryString += " WHERE ";
+        queryString += condition;
+    
+        console.log(queryString);
+        return connectionQuery(queryString);
     }
-
 
 };
 
