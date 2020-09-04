@@ -10,9 +10,15 @@ Then the config file was set with my connection, ORM, and modules,,
   insertOne()
   updateOne() these were the functions that were then used to read the query.
 
-  - The way the app works is using query files to save a burger on the left side of the screen, you also have the option to ndevour that burger to put it on the right side of the screen and also you can add another burger.
+  - The way the app works is using query files to save a burger on the left side of the screen, you also have the option to devour that burger to put it on the right side of the screen and also you can add another burger.
 
   - The next step was my contoller another javascript file for express to read.
 
    -  I also added my handlebars inside my last directory views.
    - Once completed the app burger express app is fully functional and working correctly.
+
+
+
+   ![Burger Screenshot](burgershot.PNG)
+
+   ![Burger Made Screenshot](madetheburger.PNG)
